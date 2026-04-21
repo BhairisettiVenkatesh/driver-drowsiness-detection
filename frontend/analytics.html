@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 
@@ -47,6 +47,86 @@ Real-time statistics of drowsiness detection events
 <canvas id="chart"></canvas>
 </div>
 
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/analytics.js"></script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Driver Fatigue Analytics</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<nav class="navbar">
+
+<div class="logo">🚨WakeDrive</div>
+
+<ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="detection.html">Detection</a></li>
+    <li><a href="analytics.html">Analytics</a></li>
+    <li><a href="login.html">Logout</a></li>
+</ul>
+
+</nav>
+
+
+<section class="section">
+
+    <h1 class="gradient-text">Driver Fatigue Analytics</h1>
+
+    <p class="subtitle">
+        Real-time statistics and fatigue monitoring insights
+    </p>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+
+        <div class="summary-box">
+            <h3>Peak Fatigue</h3>
+            <p id="peakFatigue">--</p>
+        </div>
+
+        <div class="summary-box">
+            <h3>Peak Time</h3>
+            <p id="peakTime">--</p>
+        </div>
+
+        <div class="summary-box">
+            <h3>Driver Risk Score</h3>
+            <p id="riskScore">--</p>
+        </div>
+
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="glass-card analytics-card">
+        <h2 class="gradient-text">Fatigue Status Distribution</h2>
+        <canvas id="chart"></canvas>
+    </div>
+
+    <!-- Timeline -->
+    <div class="glass-card analytics-card">
+        <h2 class="gradient-text">Fatigue Severity Timeline</h2>
+        <p class="subtitle">Visual representation of fatigue states over recorded events</p>
+        <div id="timeline" class="timeline-bar"></div>
+    </div>
 
 </section>
 

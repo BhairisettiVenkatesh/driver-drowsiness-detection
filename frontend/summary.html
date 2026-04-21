@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Summary</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<nav class="navbar">
+    <div class="logo">WakeDrive</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<section class="section">
+    <div class="glass-card detection-card">
+
+        <h1 class="gradient-text">Session Summary</h1>
+
+        <p class="subtitle">
+            Summary of the completed driver monitoring session.
+        </p>
+
+        <div class="summary-grid">
+
+            <div class="summary-box">
+                <h3>Session Duration</h3>
+                <p id="duration">--</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>Total Fatigue Events</h3>
+                <p id="events">--</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>Average Fatigue Score</h3>
+                <p id="avgScore">--</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>Maximum Fatigue Score</h3>
+                <p id="maxScore">--</p>
+            </div>
+
+            <div class="summary-box full-width">
+                <h3>Most Frequent Status</h3>
+                <p id="statusSummary">--</p>
+            </div>
+
+        </div>
+
+        <div class="control-buttons">
+            <a href="detection.html" class="primary-btn"> ← Back to Detection</a>
+        </div>
+
+    </div>
+</section>
+
+<script src="js/summary.js"></script>
+<script>
+function logout(){
+    localStorage.removeItem("user");
+}
+</script>
+
+</body>
+</html>

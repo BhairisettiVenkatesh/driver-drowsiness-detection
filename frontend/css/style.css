@@ -740,3 +740,128 @@ font-weight:bold;
    flex-direction: column;
    align-items:center;
 }
+
+
+
+/* =========================
+   TEAM ENHANCED CARDS
+========================= */
+
+.team-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00e5ff, #4facfe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #03121a;
+    box-shadow: 0 0 15px rgba(0,229,255,0.4);
+}
+
+.team-card .card {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow effect on hover */
+.team-card .card::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(0,229,255,0.2), transparent 70%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.team-card .card:hover::before {
+    opacity: 1;
+}
+
+.team-card .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(0,229,255,0.3);
+}
+
+/* =========================
+   ANALYTICS PAGE
+========================= */
+
+.analytics-card {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.summary-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,229,255,0.18);
+    border-radius: 16px;
+    padding: 25px;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.summary-box:hover {
+    transform: translateY(-5px);
+    border-color: #00e5ff;
+    box-shadow: 0 0 20px rgba(0,229,255,0.18);
+}
+
+.summary-box h3 {
+    color: #00e5ff;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.summary-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.timeline-bar {
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    margin-top: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,229,255,0.18);
+}
+
+.timeline-segment {
+    flex: 1;
+    min-width: 8px;
+}
+
+.alert {
+    background: #00ffcc;
+}
+
+.mild {
+    background: #ffaa00;
+}
+
+.drowsy {
+    background: #ff3b3b;
+}

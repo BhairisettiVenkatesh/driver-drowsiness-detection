@@ -1,3 +1,471 @@
+# # from fastapi import FastAPI
+# # from fastapi.middleware.cors import CORSMiddleware
+# # import threading
+# # import sqlite3
+
+# # from backend.auth import router
+# # from backend import realtime
+
+# # # =========================
+# # # CREATE FASTAPI APP
+# # # =========================
+
+# # app = FastAPI()
+
+# # # =========================
+# # # ENABLE CORS FOR FRONTEND
+# # # =========================
+
+# # app.add_middleware(
+# #     CORSMiddleware,
+# #     allow_origins=["*"],
+# #     allow_credentials=True,
+# #     allow_methods=["*"],
+# #     allow_headers=["*"],
+# # )
+
+# # # =========================
+# # # INCLUDE AUTH ROUTES
+# # # =========================
+
+# # app.include_router(router)
+
+# # # =========================
+# # # TEST ROUTE
+# # # =========================
+
+# # @app.get("/")
+# # def home():
+
+# #     return {"message": "Backend running successfully"}
+
+
+# # # =========================
+# # # DETECTION CONTROL VARIABLES
+# # # =========================
+
+# # detection_thread = None
+# # detection_running = False
+
+
+# # # =========================
+# # # START DETECTION ENDPOINT
+# # # =========================
+
+# # @app.get("/start-detection")
+# # def start_detection():
+
+# #     global detection_thread
+# #     global detection_running
+
+# #     if detection_running:
+
+# #         return {"status": "already running"}
+
+# #     try:
+
+# #         detection_running = True
+
+# #         detection_thread = threading.Thread(
+# #             target=realtime.start_detection,
+# #             daemon=True
+# #         )
+
+# #         detection_thread.start()
+
+# #         print("Detection thread started")
+
+# #         return {"status": "started"}
+
+# #     except Exception as e:
+
+# #         detection_running = False
+
+# #         print("Error starting detection:", e)
+
+# #         return {"status": "error", "message": str(e)}
+
+
+
+# # # =========================
+# # # STOP DETECTION ENDPOINT
+# # # =========================
+
+# # @app.get("/stop-detection")
+# # def stop_detection():
+
+# #     global detection_running
+# #     global detection_thread
+
+# #     if not detection_running:
+
+# #         return {"status": "not running"}
+
+# #     try:
+
+# #         realtime.stop_detection()
+
+# #         detection_running = False
+# #         detection_thread = None
+
+# #         print("Detection stopped")
+
+# #         return {"status": "stopped"}
+
+# #     except Exception as e:
+
+# #         print("Error stopping detection:", e)
+
+# #         return {"status": "error", "message": str(e)}
+
+
+# # # =========================
+# # #  NEW ANALYTICS API
+# # # =========================
+
+# # @app.get("/analytics")
+# # def analytics():
+
+# #     conn = sqlite3.connect("database/users.db")
+# #     cursor = conn.cursor()
+
+# #     cursor.execute("""
+# #     SELECT status, COUNT(*)
+# #     FROM detection_logs
+# #     GROUP BY status
+# #     """)
+
+# #     data = cursor.fetchall()
+
+# #     conn.close()
+
+# #     return {"data": data}
+
+
+
+
+# from fastapi import FastAPI
+# from fastapi.middleware.cors import CORSMiddleware
+# import threading
+# import sqlite3
+
+# from backend.auth import router
+# from backend import realtime
+
+# # =========================
+# # CREATE FASTAPI APP
+# # =========================
+
+# app = FastAPI()
+
+# # =========================
+# # ENABLE CORS FOR FRONTEND
+# # =========================
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# # =========================
+# # INCLUDE AUTH ROUTES
+# # =========================
+
+# app.include_router(router)
+
+# # =========================
+# # TEST ROUTE
+# # =========================
+
+# @app.get("/")
+# def home():
+#     return {"message": "Backend running successfully"}
+
+
+# # =========================
+# # DETECTION CONTROL VARIABLES
+# # =========================
+
+# detection_thread = None
+# detection_running = False
+
+
+# # =========================
+# # START DETECTION ENDPOINT
+# # =========================
+
+# @app.get("/start-detection")
+# def start_detection():
+
+#     global detection_thread
+#     global detection_running
+
+#     if detection_running:
+#         return {"status": "already running"}
+
+#     try:
+#         detection_running = True
+
+#         detection_thread = threading.Thread(
+#             target=realtime.start_detection,
+#             daemon=True
+#         )
+
+#         detection_thread.start()
+
+#         print("Detection thread started")
+
+#         return {"status": "started"}
+
+#     except Exception as e:
+
+#         detection_running = False
+
+#         print("Error starting detection:", e)
+
+#         return {"status": "error", "message": str(e)}
+
+
+# # =========================
+# # STOP DETECTION ENDPOINT
+# # =========================
+
+# @app.get("/stop-detection")
+# def stop_detection():
+
+#     global detection_running
+#     global detection_thread
+
+#     if not detection_running:
+#         return {"status": "not running"}
+
+#     try:
+#         realtime.stop_detection()
+
+#         detection_running = False
+#         detection_thread = None
+
+#         print("Detection stopped")
+
+#         return {"status": "stopped"}
+
+#     except Exception as e:
+
+#         print("Error stopping detection:", e)
+
+#         return {"status": "error", "message": str(e)}
+
+
+# # =========================
+# # SESSION SUMMARY ENDPOINT
+# # =========================
+
+# @app.get("/session-summary")
+# def session_summary():
+#     return realtime.get_session_summary()
+
+
+# # =========================
+# # ANALYTICS API
+# # =========================
+
+# @app.get("/analytics")
+# def analytics():
+
+#     conn = sqlite3.connect("database/users.db")
+#     cursor = conn.cursor()
+
+#     cursor.execute("""
+#     SELECT status, COUNT(*)
+#     FROM detection_logs
+#     GROUP BY status
+#     """)
+
+#     data = cursor.fetchall()
+
+#     conn.close()
+
+#     return {"data": data}
+
+
+# from fastapi import FastAPI
+# from fastapi.middleware.cors import CORSMiddleware
+# import threading
+# import sqlite3
+
+# from backend.auth import router
+# from backend import realtime
+
+# # =========================
+# # CREATE FASTAPI APP
+# # =========================
+
+# app = FastAPI()
+
+# # =========================
+# # ENABLE CORS FOR FRONTEND
+# # =========================
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# # =========================
+# # INCLUDE AUTH ROUTES
+# # =========================
+
+# app.include_router(router)
+
+# # =========================
+# # TEST ROUTE
+# # =========================
+
+# @app.get("/")
+# def home():
+#     return {"message": "Backend running successfully"}
+
+
+# # =========================
+# # DETECTION CONTROL VARIABLES
+# # =========================
+
+# detection_thread = None
+# detection_running = False
+
+
+# # =========================
+# # START DETECTION ENDPOINT
+# # =========================
+
+# @app.get("/start-detection")
+# def start_detection():
+
+#     global detection_thread
+#     global detection_running
+
+#     if detection_running:
+#         return {"status": "already running"}
+
+#     try:
+#         detection_running = True
+
+#         detection_thread = threading.Thread(
+#             target=realtime.start_detection,
+#             daemon=True
+#         )
+
+#         detection_thread.start()
+
+#         print("Detection thread started")
+
+#         return {"status": "started"}
+
+#     except Exception as e:
+
+#         detection_running = False
+
+#         print("Error starting detection:", e)
+
+#         return {"status": "error", "message": str(e)}
+
+
+# # =========================
+# # STOP DETECTION ENDPOINT
+# # =========================
+
+# @app.get("/stop-detection")
+# def stop_detection():
+
+#     global detection_running
+#     global detection_thread
+
+#     if not detection_running:
+#         return {"status": "not running"}
+
+#     try:
+#         realtime.stop_detection()
+
+#         detection_running = False
+#         detection_thread = None
+
+#         print("Detection stopped")
+
+#         return {"status": "stopped"}
+
+#     except Exception as e:
+
+#         print("Error stopping detection:", e)
+
+#         return {"status": "error", "message": str(e)}
+
+
+# # =========================
+# # SESSION SUMMARY ENDPOINT
+# # =========================
+
+# @app.get("/session-summary")
+# def session_summary():
+#     return realtime.get_session_summary()
+
+
+# # =========================
+# # ANALYTICS API (FOR PIE CHART)
+# # =========================
+
+# @app.get("/analytics")
+# def analytics():
+
+#     conn = sqlite3.connect("database/users.db")
+#     cursor = conn.cursor()
+
+#     cursor.execute("""
+#     SELECT status, COUNT(*)
+#     FROM detection_logs
+#     GROUP BY status
+#     """)
+
+#     data = cursor.fetchall()
+
+#     conn.close()
+
+#     return {"data": data}
+
+
+# # =========================
+# # ANALYTICS DETAILS API (NEW)
+# # =========================
+
+# @app.get("/analytics-details")
+# def analytics_details():
+
+#     conn = sqlite3.connect("database/users.db")
+#     cursor = conn.cursor()
+
+#     try:
+#         cursor.execute("""
+#         SELECT timestamp, fatigue_score, status
+#         FROM detection_logs
+#         ORDER BY timestamp ASC
+#         """)
+
+#         data = cursor.fetchall()
+
+#     except Exception as e:
+#         print("Analytics details error:", e)
+#         data = []
+
+#     conn.close()
+
+#     return {"data": data}
+
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import threading
@@ -36,7 +504,6 @@ app.include_router(router)
 
 @app.get("/")
 def home():
-
     return {"message": "Backend running successfully"}
 
 
@@ -59,11 +526,9 @@ def start_detection():
     global detection_running
 
     if detection_running:
-
         return {"status": "already running"}
 
     try:
-
         detection_running = True
 
         detection_thread = threading.Thread(
@@ -86,7 +551,6 @@ def start_detection():
         return {"status": "error", "message": str(e)}
 
 
-
 # =========================
 # STOP DETECTION ENDPOINT
 # =========================
@@ -98,11 +562,9 @@ def stop_detection():
     global detection_thread
 
     if not detection_running:
-
         return {"status": "not running"}
 
     try:
-
         realtime.stop_detection()
 
         detection_running = False
@@ -120,7 +582,16 @@ def stop_detection():
 
 
 # =========================
-#  NEW ANALYTICS API
+# SESSION SUMMARY ENDPOINT
+# =========================
+
+@app.get("/session-summary")
+def session_summary():
+    return realtime.get_session_summary()
+
+
+# =========================
+# ANALYTICS API (PIE CHART - DB BASED)
 # =========================
 
 @app.get("/analytics")
@@ -140,3 +611,12 @@ def analytics():
     conn.close()
 
     return {"data": data}
+
+
+# =========================
+# ANALYTICS DETAILS API (SESSION BASED)
+# =========================
+
+@app.get("/analytics-details")
+def analytics_details():
+    return realtime.get_session_analytics()
